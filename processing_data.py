@@ -25,6 +25,9 @@ def processing_messages(list_of_payload_messages):
             postalcode = postalcode_regex.search(message)
             if postalcode:
                 message_dict["postalcode"] = postalcode[0]
+            
+            if not phone and not email and not postalcode:
+                continue
             list_of_dict.append(message_dict)
         return 0, list_of_dict
     except Exception:
