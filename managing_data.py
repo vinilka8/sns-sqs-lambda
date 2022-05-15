@@ -1,6 +1,3 @@
-"""
-Your module description
-"""
 import boto3
 import uuid
 import os
