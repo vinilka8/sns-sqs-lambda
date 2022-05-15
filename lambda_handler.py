@@ -20,11 +20,12 @@ def lambda_handler(event, context):
         else:
             logger.info('END - processing messages has been successful.')
         
-        logger.info('NEXT - managing_data.manage_put_item to be executed ... ')
-        error_code, data_or_errmsg = managing_data.manage_put_item(data_or_errmsg)
-        if error_code != 0:
-            raise Exception(data_or_errmsg)
-        else:
-            logger.info('END - putting items to DynamoDB has been successful.')
+        if data_or_errmsg:
+            logger.info('NEXT - managing_data.manage_put_item to be executed ... ')
+            error_code, data_or_errmsg = managing_data.manage_put_item(data_or_errmsg)
+            if error_code != 0:
+                raise Exception(data_or_errmsg)
+            else:
+                logger.info('END - putting items to DynamoDB has been successful.')
     except Exception:
         raise Exception('Lambda Handler has got failed due to messaging processing or put item into DB')
